@@ -63,12 +63,13 @@ test("Title of marketplace page", async() => {
   expect(actual).toEqual("GitHub Marketplace · to improve your workflow · GitHub");
 });
 
-test("Trending page", async() => {
+test("Repo issues test", async() => {
   page = await browser.newPage();
   await page.setDefaultTimeout(1000);
   await page.setDefaultNavigationTimeout(10000);
   await page.goto("https://github.com/Denishsh/Puppeteer");
   
-  const actual = await page.$eval("#repo-content-pjax-container", e => e.textContent );
-  expect(actual).toEqual("Puppeteer");
+  const issues = await page.waitForSelector('#issues-tab');
+  await issues.click();
+  await page.waitForSelector(".blankslate");
 });
